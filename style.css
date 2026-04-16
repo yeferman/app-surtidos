@@ -1,0 +1,67 @@
+body {
+    font-family: 'Segoe UI', Arial;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background: #45a049;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 700px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .producto {
+    background: #e8f5e9;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+  
+  .producto h4 {
+    margin-top: 0;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  .producto-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .producto-grid div {
+    background: rgba(255,255,255,0.5);
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .producto h4 {
+    background: linear-gradient(to right, #c8e6c9, #e8f5e9);
+    padding: 8px;
+    border-radius: 6px;
+  }
