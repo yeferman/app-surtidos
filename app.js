@@ -1,3 +1,12 @@
+function formatoMoneda(valor) {
+  return new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+  }).format(valor);
+}
+
+
 let surtidos = cargar();
 
 function crearSurtido() {
@@ -93,14 +102,14 @@ function render() {
   <div><strong>Restante:</strong> ${calc.restante}</div>
   <div></div>
 
-  <div><strong>Capital:</strong> ${calc.capital}</div>
-  <div><strong>Total:</strong> ${calc.total}</div>
-  <div>
-    <strong>Ganancia:</strong> 
-    <span style="color:${calc.ganancia >= 0 ? 'green' : 'red'}">
-      ${calc.ganancia}
-    </span>
-  </div>
+ <div><strong>Capital:</strong> ${formatoMoneda(calc.capital)}</div>
+<div><strong>Total:</strong> ${formatoMoneda(calc.total)}</div>
+<div>
+  <strong>Ganancia:</strong> 
+  <span class="${calc.ganancia >= 0 ? 'ganancia' : 'perdida'}">
+    ${formatoMoneda(calc.ganancia)}
+  </span>
+</div>
 
 </div> `;
 
