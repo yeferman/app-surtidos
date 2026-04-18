@@ -6,7 +6,6 @@ function formatoMoneda(valor) {
   }).format(valor);
 }
 
-
 let surtidos = cargar();
 
 function crearSurtido() {
@@ -42,28 +41,96 @@ function agregarProducto(surtidoId) {
   render();
 }
 
-function agregarVenta(surtidoId, productoId) {
-  let cantidad = Number(prompt("Cantidad vendida (kg):"));
+// 🔥 NUEVO SISTEMA DE VENTAS
+let ventaActual = {};
 
-  let surtido = surtidos.find(s => s.id === surtidoId);
-  let producto = surtido.productos.find(p => p.id === productoId);
+function abrirVenta(surtidoId, productoId) {
+  ventaActual = { surtidoId, productoId };
+  document.getElementById("modalVenta").classList.remove("hidden");
+}
 
-  let vendidos = producto.ventas.reduce((a, b) => a + b, 0);
+function cerrarModal() {
+  document.getElementById("modalVenta").classList.add("hidden");
+  document.getElementById("inputKg").value = "";
+  document.getElementById("inputNota").value = "";
+}
 
-  if (vendidos + cantidad > producto.kilos) {
-    alert("No puedes vender más de lo que tienes");
+function confirmarVenta() {
+  let kg = Number(document.getElementById("inputKg").value);
+  let nota = document.getElementById("inputNota").value;
+
+  if (!kg || kg <= 0) {
+    alert("Cantidad inválida");
     return;
   }
 
-  producto.ventas.push(cantidad);
+  let surtido = surtidos.find(s => s.id === ventaActual.surtidoId);
+  let producto = surtido.productos.find(p => p.id === ventaActual.productoId);
+
+  let vendidos = producto.ventas.reduce((a, v) => {
+    return a + (typeof v === "number" ? v : v.cantidad);
+  }, 0);
+
+  if (vendidos + kg > producto.kilos) {
+    alert("No tienes suficiente inventario");
+    return;
+  }
+
+  producto.ventas.push({
+    cantidad: kg,
+    nota: nota || "",
+    fecha: new Date().toLocaleString()
+  });
 
   guardar(surtidos);
+  cerrarModal();
   render();
 }
 
+// 📜 HISTORIAL
+function verHistorial(surtidoId, productoId) {
+  let surtido = surtidos.find(s => s.id === surtidoId);
+  let producto = surtido.productos.find(p => p.id === productoId);
+
+  let contenedor = document.getElementById("listaHistorial");
+
+  if (producto.ventas.length === 0) {
+    contenedor.innerHTML = "<p>No hay ventas</p>";
+  } else {
+    contenedor.innerHTML = producto.ventas
+      .slice()
+      .reverse()
+      .map(v => {
+        let cantidad = typeof v === "number" ? v : v.cantidad;
+        let nota = typeof v === "number" ? "" : v.nota;
+        let fecha = typeof v === "number" ? "" : v.fecha;
+
+        return `
+          <div>
+            <strong>${fecha}</strong><br>
+            ${cantidad} kg - ${nota || "Sin nota"}
+          </div>
+          <hr>
+        `;
+      })
+      .join("");
+  }
+
+  document.getElementById("modalHistorial").classList.remove("hidden");
+}
+
+function cerrarHistorial() {
+  document.getElementById("modalHistorial").classList.add("hidden");
+}
+
+// 🧮 CÁLCULOS
 function calcularProducto(producto) {
   let capital = producto.kilos * producto.precioKilo;
-  let vendidos = producto.ventas.reduce((a, b) => a + b, 0);
+
+  let vendidos = producto.ventas.reduce((a, v) => {
+    return a + (typeof v === "number" ? v : v.cantidad);
+  }, 0);
+
   let total = vendidos * producto.precioVenta;
   let ganancia = total - capital;
   let restante = producto.kilos - vendidos;
@@ -71,6 +138,7 @@ function calcularProducto(producto) {
   return { capital, vendidos, total, ganancia, restante };
 }
 
+// 🎨 RENDER
 function render() {
   let contenedor = document.getElementById("surtidos");
   contenedor.innerHTML = "";
@@ -81,7 +149,9 @@ function render() {
 
     div.innerHTML = `
       <h3>Surtido - ${surtido.fecha}</h3>
-      <button onclick="agregarProducto(${surtido.id})">Agregar Producto</button>
+      <button class="btn-full" onclick="agregarProducto(${surtido.id})">
+        Agregar Producto
+      </button>
     `;
 
     surtido.productos.forEach(p => {
@@ -91,27 +161,40 @@ function render() {
       prodDiv.className = "producto";
 
       prodDiv.innerHTML = `
-        <h4>${p.nombre}</h4>
+        <h4 class="header-producto">
+          <span>${p.nombre}</span>
+          <button class="btn-vender"
+            onclick="abrirVenta(${surtido.id}, ${p.id})">
+            Vender
+          </button>
+        </h4>
+
         <div class="producto-grid">
 
-  <div><strong>Kilos:</strong> ${p.kilos}</div>
-  <div><strong>Precio compra:</strong> ${p.precioKilo}</div>
-  <div><strong>Precio venta:</strong> ${p.precioVenta}</div>
+          <div><strong>Kilos:</strong> ${p.kilos}</div>
+          <div><strong>Compra:</strong> ${formatoMoneda(p.precioKilo)}</div>
+          <div><strong>Venta:</strong> ${formatoMoneda(p.precioVenta)}</div>
 
-  <div><strong>Vendidos:</strong> ${calc.vendidos}</div>
-  <div><strong>Restante:</strong> ${calc.restante}</div>
-  <div></div>
+          <div><strong>Vendidos:</strong> ${calc.vendidos}</div>
+          <div><strong>Restante:</strong> ${calc.restante}</div>
+          <div></div>
 
- <div><strong>Capital:</strong> ${formatoMoneda(calc.capital)}</div>
-<div><strong>Total:</strong> ${formatoMoneda(calc.total)}</div>
-<div>
-  <strong>Ganancia:</strong> 
-  <span class="${calc.ganancia >= 0 ? 'ganancia' : 'perdida'}">
-    ${formatoMoneda(calc.ganancia)}
-  </span>
-</div>
+          <div><strong>Capital:</strong> ${formatoMoneda(calc.capital)}</div>
+          <div><strong>Total:</strong> ${formatoMoneda(calc.total)}</div>
+          <div>
+            <strong>Ganancia:</strong>
+            <span class="${calc.ganancia >= 0 ? 'ganancia' : 'perdida'}">
+              ${formatoMoneda(calc.ganancia)}
+            </span>
+          </div>
 
-</div> `;
+        </div>
+
+        <button class="btn-full btn-historial"
+          onclick="verHistorial(${surtido.id}, ${p.id})">
+          📜 Historial
+        </button>
+      `;
 
       div.appendChild(prodDiv);
     });
