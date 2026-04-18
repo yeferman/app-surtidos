@@ -11,13 +11,18 @@ let surtidos = cargar();
 function crearSurtido() {
   let nuevo = {
     id: Date.now(),
-    fecha: new Date().toLocaleDateString(),
+    fecha: new Date().toISOString(),
     productos: []
   };
 
   surtidos.push(nuevo);
   guardar(surtidos);
   render();
+}
+
+function formatearFecha(fecha) {
+  const opciones = { day: 'numeric', month: 'short', year: 'numeric' };
+  return new Date(fecha).toLocaleDateString('es-CO', opciones);
 }
 
   function borrarSurtido(id) {
@@ -225,7 +230,7 @@ function render() {
        <div class="header-surtido">
     <div class="fecha-surtido">
   <span class="label">SURTIDO</span>
-  <span class="fecha">${surtido.fecha}</span>
+  <span class="fecha">${formatearFecha(surtido.fecha)}</span>
 </div>
 
     <button class="btn-delete"
