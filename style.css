@@ -202,3 +202,28 @@ button {
   outline: none;
   transition: all 0.2s ease;
 }
+
+.modal-content input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-content button {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.modal-content button:last-child {
+  background: #ccc;
+  color: #333;
+}
+
+.modal-content input::placeholder {
+  color: #999;
+}
