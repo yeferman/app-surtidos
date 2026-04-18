@@ -258,12 +258,6 @@ function render() {
     </button>
   </div>
 </h4>
-          <button class="btn-vender"
-            onclick="abrirVenta(${surtido.id}, ${p.id})">
-            Vender
-          </button>
-        </h4>
-
         <div class="producto-grid">
 
           <div><strong>Kilos:</strong> ${p.kilos}</div>
