@@ -227,3 +227,13 @@ button {
 .modal-content input::placeholder {
   color: #999;
 }
+.acciones-producto {
+  display: flex;
+  gap: 5px;
+}
+
+.btn-edit {
+  background: #1976d2;
+  padding: 5px 8px;
+  font-size: 12px;
+}
