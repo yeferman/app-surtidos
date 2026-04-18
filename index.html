@@ -10,6 +10,13 @@
 <h1>Control de Surtidos</h1>
 
 <button onclick="crearSurtido()">➕ Nuevo Surtido</button>
+  
+  <button onclick="exportarBackup()">💾 Guardar copia</button>
+
+<input type="file" id="inputBackup" hidden onchange="importarBackup(event)">
+<button onclick="document.getElementById('inputBackup').click()">
+  📂 Restaurar copia
+</button>
 
 <div id="surtidos"></div>
 
