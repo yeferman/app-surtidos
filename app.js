@@ -15,17 +15,17 @@ function crearSurtido() {
     productos: []
   };
 
-  surtidos.push(nuevo);
-  guardar(surtidos);
-  render();
-}
-
-function borrarSurtido(id) {
+  function borrarSurtido(id) {
   let confirmar = confirm("¿Seguro que quieres eliminar este surtido?");
   if (!confirmar) return;
 
   surtidos = surtidos.filter(s => s.id !== id);
 
+  guardar(surtidos);
+  render();
+}
+
+  surtidos.push(nuevo);
   guardar(surtidos);
   render();
 }
@@ -165,6 +165,11 @@ function render() {
     onclick="borrarSurtido(${surtido.id})">
     🗑️
   </button>
+
+   <h3>Surtido - ${surtido.fecha}</h3>
+      <button class="btn-full" onclick="agregarProducto(${surtido.id})">
+        Agregar Producto
+      </button>
 </div>
     `;
 
