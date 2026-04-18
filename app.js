@@ -15,17 +15,17 @@ function crearSurtido() {
     productos: []
   };
 
+  surtidos.push(nuevo);
+  guardar(surtidos);
+  render();
+}
+
   function borrarSurtido(id) {
   let confirmar = confirm("¿Seguro que quieres eliminar este surtido?");
   if (!confirmar) return;
 
   surtidos = surtidos.filter(s => s.id !== id);
 
-  guardar(surtidos);
-  render();
-}
-
-  surtidos.push(nuevo);
   guardar(surtidos);
   render();
 }
