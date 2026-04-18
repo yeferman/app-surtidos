@@ -15,7 +15,7 @@ function crearSurtido() {
     productos: []
   };
 
-  surtidos.push(nuevo);
+  surtidos.unshift(nuevo);
   guardar(surtidos);
   render();
 }
