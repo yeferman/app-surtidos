@@ -42,6 +42,21 @@
   </div>
 </div>
 
+  <div id="modalEditar" class="modal hidden">
+  <div class="modal-content">
+
+    <h3>Editar producto</h3>
+
+    <input id="editKilos" type="number" placeholder="Kilos totales">
+    <input id="editCompra" type="number" placeholder="Precio compra">
+    <input id="editVenta" type="number" placeholder="Precio venta">
+
+    <button onclick="guardarEdicion()">Guardar</button>
+    <button onclick="cerrarEditar()">Cancelar</button>
+
+  </div>
+</div>
+
 <script src="storage.js"></script>
 <script src="app.js"></script>
 </body>
