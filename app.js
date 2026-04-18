@@ -161,6 +161,57 @@ function calcularProducto(producto) {
   return { capital, vendidos, total, ganancia, restante };
 }
 
+function exportarBackup() {
+  let datos = JSON.stringify(surtidos, null, 2);
+
+  let blob = new Blob([datos], { type: "application/json" });
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "backup_surtidos.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function importarBackup(event) {
+  let archivo = event.target.files[0];
+
+  if (!archivo) return;
+
+  let lector = new FileReader();
+
+  lector.onload = function(e) {
+    try {
+      let datos = JSON.parse(e.target.result);
+
+      if (!Array.isArray(datos)) {
+        alert("Archivo inválido");
+        return;
+      }
+
+      let confirmar = confirm("Esto reemplazará todos tus datos actuales. ¿Continuar?");
+      if (!confirmar) return;
+
+      surtidos = datos;
+
+      guardar(surtidos);
+      render();
+
+      alert("Backup restaurado correctamente ✅");
+
+    } catch (error) {
+      alert("Error al leer el archivo");
+    }
+  };
+
+  lector.readAsText(archivo);
+}
+
+
+
+
 // 🎨 RENDER
 function render() {
   let contenedor = document.getElementById("surtidos");
