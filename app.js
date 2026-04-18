@@ -6,6 +6,7 @@ function formatoMoneda(valor) {
   }).format(valor);
 }
 
+let editActual = {};
 let surtidos = cargar();
 
 function crearSurtido() {
@@ -170,6 +171,56 @@ function verHistorial(surtidoId, productoId) {
 
 function cerrarHistorial() {
   document.getElementById("modalHistorial").classList.add("hidden");
+}
+
+
+function abrirEditar(surtidoId, productoId) {
+  editActual = { surtidoId, productoId };
+
+  let surtido = surtidos.find(s => s.id === surtidoId);
+  let producto = surtido.productos.find(p => p.id === productoId);
+
+  document.getElementById("editKilos").value = producto.kilos;
+  document.getElementById("editCompra").value = producto.precioKilo;
+  document.getElementById("editVenta").value = producto.precioVenta;
+
+  document.getElementById("modalEditar").classList.remove("hidden");
+}
+
+function cerrarEditar() {
+  document.getElementById("modalEditar").classList.add("hidden");
+}
+
+function guardarEdicion() {
+  let kilos = Number(document.getElementById("editKilos").value);
+  let compra = Number(document.getElementById("editCompra").value);
+  let venta = Number(document.getElementById("editVenta").value);
+
+  if (!kilos || kilos <= 0) {
+    alert("Kilos inválidos");
+    return;
+  }
+
+  let surtido = surtidos.find(s => s.id === editActual.surtidoId);
+  let producto = surtido.productos.find(p => p.id === editActual.productoId);
+
+  let vendidos = producto.ventas.reduce((a, v) => {
+    return a + (typeof v === "number" ? v : v.cantidad);
+  }, 0);
+
+  // 🚨 VALIDACIÓN CLAVE
+  if (kilos < vendidos) {
+    alert("No puedes poner menos kilos que los ya vendidos");
+    return;
+  }
+
+  producto.kilos = kilos;
+  producto.precioKilo = compra;
+  producto.precioVenta = venta;
+
+  guardar(surtidos);
+  render();
+  cerrarEditar();
 }
 
 // 🧮 CÁLCULOS
