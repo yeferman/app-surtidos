@@ -139,6 +139,11 @@ button {
   width: auto;
   padding: 6px 10px;
 }
+
+
+button {
+  margin: 5px;
+}
   font-size: 16px;
 }
 
