@@ -127,6 +127,18 @@ button {
   background: #e53935;
   width: auto;
   padding: 6px 10px;
+
+}
+  .acciones-producto {
+  display: flex;
+  gap: 5px;
+}
+
+.btn-delete {
+  background: #e53935;
+  width: auto;
+  padding: 6px 10px;
+}
   font-size: 16px;
 }
 
