@@ -13,6 +13,26 @@
 
 <div id="surtidos"></div>
 
+<!-- MODAL VENTA -->
+<div id="modalVenta" class="modal hidden">
+  <div class="modal-content">
+    <h3>Registrar venta</h3>
+    <input id="inputKg" type="number" placeholder="Kilos vendidos">
+    <input id="inputNota" placeholder="Nota">
+    <button onclick="confirmarVenta()">Confirmar</button>
+    <button onclick="cerrarModal()">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL HISTORIAL -->
+<div id="modalHistorial" class="modal hidden">
+  <div class="modal-content">
+    <h3>Historial</h3>
+    <div id="listaHistorial"></div>
+    <button onclick="cerrarHistorial()">Cerrar</button>
+  </div>
+</div>
+
 <script src="storage.js"></script>
 <script src="app.js"></script>
 </body>
