@@ -51,6 +51,19 @@ function agregarProducto(surtidoId) {
   render();
 }
 
+
+function borrarProducto(surtidoId, productoId) {
+  let confirmar = confirm("¿Quitar este producto?");
+  if (!confirmar) return;
+
+  let surtido = surtidos.find(s => s.id === surtidoId);
+
+  surtido.productos = surtido.productos.filter(p => p.id !== productoId);
+
+  guardar(surtidos);
+  render();
+}
+
 // 🔥 NUEVO SISTEMA DE VENTAS
 let ventaActual = {};
 
@@ -179,8 +192,21 @@ function render() {
       prodDiv.className = "producto";
 
       prodDiv.innerHTML = `
-        <h4 class="header-producto">
-          <span>${p.nombre}</span>
+       <h4 class="header-producto">
+  <span>${p.nombre}</span>
+
+  <div class="acciones-producto">
+    <button class="btn-vender"
+      onclick="abrirVenta(${surtido.id}, ${p.id})">
+      Vender
+    </button>
+
+    <button class="btn-delete"
+      onclick="borrarProducto(${surtido.id}, ${p.id})">
+      🗑️
+    </button>
+  </div>
+</h4>
           <button class="btn-vender"
             onclick="abrirVenta(${surtido.id}, ${p.id})">
             Vender
