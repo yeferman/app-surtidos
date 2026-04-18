@@ -323,11 +323,11 @@ function render() {
       prodDiv.className = "producto";
 
       prodDiv.innerHTML = `
-    <span>${p.nombre}</span>
-<h4 class="header-producto">
-  <div class="acciones-producto">
-    <button class="btn-edit"
-      onclick="abrirEditar(${surtido.id}, ${p.id})">
+      <h4 class="header-producto">
+        <span>${p.nombre}</span>
+        <div class="acciones-producto">
+        <button class="btn-edit"
+        onclick="abrirEditar(${surtido.id}, ${p.id})">
       ✏️
     </button>
 
