@@ -20,6 +20,16 @@ function crearSurtido() {
   render();
 }
 
+function borrarSurtido(id) {
+  let confirmar = confirm("¿Seguro que quieres eliminar este surtido?");
+  if (!confirmar) return;
+
+  surtidos = surtidos.filter(s => s.id !== id);
+
+  guardar(surtidos);
+  render();
+}
+
 function agregarProducto(surtidoId) {
   let nombre = prompt("Nombre del producto:");
   let kilos = Number(prompt("Kilos comprados:"));
@@ -148,10 +158,14 @@ function render() {
     div.className = "card";
 
     div.innerHTML = `
-      <h3>Surtido - ${surtido.fecha}</h3>
-      <button class="btn-full" onclick="agregarProducto(${surtido.id})">
-        Agregar Producto
-      </button>
+      <div class="header-surtido">
+  <h3>Surtido - ${surtido.fecha}</h3>
+
+  <button class="btn-delete"
+    onclick="borrarSurtido(${surtido.id})">
+    🗑️
+  </button>
+</div>
     `;
 
     surtido.productos.forEach(p => {
