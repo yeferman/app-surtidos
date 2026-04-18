@@ -223,7 +223,10 @@ function render() {
 
     div.innerHTML = `
        <div class="header-surtido">
-    <h3>Surtido - ${surtido.fecha}</h3>
+    <div class="fecha-surtido">
+  <span class="label">SURTIDO</span>
+  <span class="fecha">${surtido.fecha}</span>
+</div>
 
     <button class="btn-delete"
       onclick="borrarSurtido(${surtido.id})">
