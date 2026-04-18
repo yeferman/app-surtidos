@@ -172,4 +172,22 @@ button {
   border-left: 4px solid #4CAF50;
   padding-left: 10px;
 }
+.item-historial {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.btn-delete-mini {
+  background: #e53935;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-delete-mini:hover {
+  background: #c62828;
+}
