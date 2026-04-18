@@ -147,5 +147,24 @@ button {
   font-size: 16px;
 }
 
+.fecha-surtido {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
 
+.fecha-surtido .label {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.fecha-surtido .fecha {
+  color: #555;
+  font-weight: 600;
+}
 
