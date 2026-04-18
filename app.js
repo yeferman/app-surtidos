@@ -115,6 +115,20 @@ function confirmarVenta() {
   render();
 }
 
+function eliminarVenta(surtidoId, productoId, index) {
+  let confirmar = confirm("¿Eliminar esta venta?");
+  if (!confirmar) return;
+
+  let surtido = surtidos.find(s => s.id === surtidoId);
+  let producto = surtido.productos.find(p => p.id === productoId);
+
+  producto.ventas.splice(index, 1);
+
+  guardar(surtidos);
+  render();
+  verHistorial(surtidoId, productoId); // refresca el modal
+}
+
 // 📜 HISTORIAL
 function verHistorial(surtidoId, productoId) {
   let surtido = surtidos.find(s => s.id === surtidoId);
@@ -128,17 +142,24 @@ function verHistorial(surtidoId, productoId) {
     contenedor.innerHTML = producto.ventas
       .slice()
       .reverse()
-      .map(v => {
+          .map((v, index) => {
         let cantidad = typeof v === "number" ? v : v.cantidad;
         let nota = typeof v === "number" ? "" : v.nota;
         let fecha = typeof v === "number" ? "" : v.fecha;
 
         return `
-          <div>
-            <strong>${fecha}</strong><br>
-            ${cantidad} kg - ${nota || "Sin nota"}
-          </div>
-          <hr>
+         <div class="item-historial">
+    <div>
+      <strong>${fecha}</strong><br>
+      ${cantidad} kg - ${nota || "Sin nota"}
+    </div>
+
+    <button class="btn-delete-mini"
+      onclick="eliminarVenta(${surtidoId}, ${productoId}, ${index})">
+      ❌
+    </button>
+  </div>
+  <hr>
         `;
       })
       .join("");
