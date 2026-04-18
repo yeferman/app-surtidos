@@ -272,14 +272,20 @@ function render() {
       prodDiv.className = "producto";
 
       prodDiv.innerHTML = `
-       <h4 class="header-producto">
-  <span>${p.nombre}</span>
+    <span>${p.nombre}</span>
 
   <div class="acciones-producto">
+    <button class="btn-edit"
+      onclick="abrirEditar(${surtido.id}, ${p.id})">
+      ✏️
+    </button>
+
     <button class="btn-vender"
       onclick="abrirVenta(${surtido.id}, ${p.id})">
       Vender
-    </button>
+    </button>   
+      
+     
 
     <button class="btn-delete"
       onclick="borrarProducto(${surtido.id}, ${p.id})">
