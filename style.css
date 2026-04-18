@@ -117,5 +117,18 @@ button {
   }
 }
 
+.header-surtido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-delete {
+  background: #e53935;
+  width: auto;
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
 
 
