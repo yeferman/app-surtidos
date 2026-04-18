@@ -168,3 +168,8 @@ button {
   font-weight: 600;
 }
 
+.fecha-surtido {
+  border-left: 4px solid #4CAF50;
+  padding-left: 10px;
+}
+
