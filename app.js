@@ -330,7 +330,8 @@ function render() {
     div.className = "card";
 
     div.innerHTML = `
-      <div class="header-surtido">
+div.innerHTML = `
+  <div class="header-surtido">
 
     <div class="fecha-surtido">
       <span class="label">Surtido</span>
@@ -349,6 +350,14 @@ function render() {
       </button>
     </div>
 
+  </div>
+
+  <!-- 🔥 ESTE ES EL QUE FALTA -->
+  <button class="btn-full"
+    onclick="agregarProducto(${surtido.id})">
+    Agregar Producto
+  </button>
+`;
   </div>
     `;
 
