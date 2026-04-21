@@ -330,7 +330,7 @@ function render() {
     div.className = "card";
 
     div.innerHTML = `
-    div class="header-surtido">
+    <div class="header-surtido">
 
   <div class="fecha-surtido">
     <span class="label">Surtido</span>
