@@ -329,7 +329,7 @@ function render() {
     let div = document.createElement("div");
     div.className = "card";
 
-    div.innerHTML = `
+  
 div.innerHTML = `
   <div class="header-surtido">
 
