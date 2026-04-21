@@ -252,3 +252,8 @@ button {
 .btn-view:hover {
   background: #125ea2;
 }
+
+
+.btn-full {
+  margin-top: 10px;
+}
