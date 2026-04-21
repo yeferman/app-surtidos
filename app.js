@@ -357,7 +357,6 @@ div.innerHTML = `
     onclick="agregarProducto(${surtido.id})">
     Agregar Producto
   </button>
-`;
   </div>
     `;
 
