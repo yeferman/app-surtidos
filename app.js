@@ -348,6 +348,12 @@ div.innerHTML = `
         onclick="borrarSurtido(${surtido.id})">
         🗑️
       </button>
+
+       <!-- ✅ BOTÓN QUE TE FALTA -->
+      <button class="btn-full"
+        onclick="agregarProducto(${surtido.id})">
+        Agregar Producto
+      </button>
     </div>
 
   </div>
