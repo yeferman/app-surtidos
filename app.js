@@ -351,13 +351,6 @@ div.innerHTML = `
     </div>
 
   </div>
-
-  <!-- 🔥 ESTE ES EL QUE FALTA -->
-  <button class="btn-full"
-    onclick="agregarProducto(${surtido.id})">
-    Agregar Producto
-  </button>
-  </div>
     `;
 
     surtido.productos.forEach(p => {
