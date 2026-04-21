@@ -330,28 +330,26 @@ function render() {
     div.className = "card";
 
     div.innerHTML = `
-    <div class="header-surtido">
+      <div class="header-surtido">
 
-  <div class="fecha-surtido">
-    <span class="label">Surtido</span>
-    <span class="fecha">${formatearFecha(surtido.fecha)}</span>
+    <div class="fecha-surtido">
+      <span class="label">Surtido</span>
+      <span class="fecha">${formatearFecha(surtido.fecha)}</span>
+    </div>
+
+    <div class="acciones-surtido">
+      <button class="btn-view"
+        onclick="verResumen(${surtido.id})">
+        👁️
+      </button>
+
+      <button class="btn-delete"
+        onclick="borrarSurtido(${surtido.id})">
+        🗑️
+      </button>
+    </div>
+
   </div>
-
-  <div class="acciones-surtido">
-    
-    <button class="btn-view"
-      onclick="verResumen(${surtido.id})">
-      👁️
-    </button>
-
-    <button class="btn-delete"
-      onclick="borrarSurtido(${surtido.id})">
-      🗑️
-    </button>
-
-  </div>
-
-</div>
     `;
 
     surtido.productos.forEach(p => {
