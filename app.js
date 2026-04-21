@@ -287,6 +287,37 @@ function importarBackup(event) {
 }
 
 
+function verResumen(surtidoId) {
+  let surtido = surtidos.find(s => s.id === surtidoId);
+
+  let capital = 0;
+  let total = 0;
+
+  surtido.productos.forEach(p => {
+    let calc = calcularProducto(p);
+    capital += calc.capital;
+    total += calc.total;
+  });
+
+  let ganancia = total - capital;
+
+  document.getElementById("resCapital").innerText = formatoMoneda(capital);
+  document.getElementById("resTotal").innerText = formatoMoneda(total);
+
+  let gananciaElem = document.getElementById("resGanancia");
+  gananciaElem.innerText = formatoMoneda(ganancia);
+
+  gananciaElem.className = ganancia >= 0 ? "ganancia" : "perdida";
+
+  document.getElementById("modalResumen").classList.remove("hidden");
+}
+
+
+function cerrarResumen() {
+  document.getElementById("modalResumen").classList.add("hidden");
+}
+
+
 
 
 // 🎨 RENDER
