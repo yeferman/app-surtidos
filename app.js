@@ -348,15 +348,14 @@ div.innerHTML = `
         onclick="borrarSurtido(${surtido.id})">
         🗑️
       </button>
-
+    </div>
+  </div>
+  
        <!-- ✅ BOTÓN QUE TE FALTA -->
       <button class="btn-full"
         onclick="agregarProducto(${surtido.id})">
         Agregar Producto
       </button>
-    </div>
-
-  </div>
     `;
 
     surtido.productos.forEach(p => {
