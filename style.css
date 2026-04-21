@@ -238,18 +238,17 @@ button {
   font-size: 12px;
 }
 
+.acciones-surtido {
+  display: flex;
+  gap: 6px;
+}
 
-<div id="modalEditar" class="modal hidden">
-  <div class="modal-content">
+.btn-view {
+  background: #1976d2;
+  padding: 6px 10px;
+  width: auto;
+}
 
-    <h3>Editar producto</h3>
-
-    <input id="editKilos" type="number" placeholder="Kilos totales">
-    <input id="editCompra" type="number" placeholder="Precio compra">
-    <input id="editVenta" type="number" placeholder="Precio venta">
-
-    <button onclick="guardarEdicion()">Guardar</button>
-    <button onclick="cerrarEditar()">Cancelar</button>
-
-  </div>
-</div>
+.btn-view:hover {
+  background: #125ea2;
+}
